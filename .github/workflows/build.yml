@@ -10,13 +10,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Change working directory to the etl directory
-        run: cd etl
-
       - name: Set up Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+
+      - name: Change working directory to the etl directory
+        run: cd etl
 
       - name: Build Rust binary in release mode
         run: cargo build --release
@@ -25,4 +25,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: my-binary
-          path: etl/target/release/main
+          path: target/release/main
