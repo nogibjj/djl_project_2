@@ -8,18 +8,19 @@ This CLI bianary is designed to create a SQLite database with Rust using ETL ope
 - update column names
 - delete unnecessty columns
 
-### ETL operations 
-extract() and load() functions were designed to extract inforamtion from a CSV datset and load into a SQLite dataset. The resulting SQLite database is located in the data folder with the followind columns:
-- Fecha
-- Hora
-- ZP
-- IMECAS 
-- Contaminante
-- Color 
 
 ### CRUD operations
+- Create and Read operations: ETL operations 
+extract() and load() functions were designed to extract inforamtion from a CSV datset and load into a SQLite dataset. The resulting SQLite database is located in the data folder with the followind columns:
+    - Fecha
+    - Hora
+    - ZP
+    - IMECAS 
+    - Contaminante
+    - Color 
 
-- update () renames the spanish names of the columns to their english translation. 
+- UPDATE
+update () renames the spanish names of the columns to their english translation. 
     - Fecha --> Date
     - Hora  Hour
     - ZP --> ZP
@@ -27,4 +28,5 @@ extract() and load() functions were designed to extract inforamtion from a CSV d
     - Contaminante --> Polluter
     - Color --> Color 
 
-- delete() removes the color columns from the data set
+- DELETE
+delete() removes the color columns from the data set

@@ -53,7 +53,27 @@ fn load() -> Result<String, Box<dyn Error>> {
     Ok("my_airDB.db".to_string())
 }
 
+fn update_col_names() -> Result<(), Box<dyn Error>> {
+    let conn = Connection::open("data/my_airDB.db")?;
 
+    // Rename the columns using ALTER TABLE
+    conn.execute("PRAGMA foreign_keys=off;", NO_PARAMS)?;
+    conn.execute("BEGIN TRANSACTION;", NO_PARAMS)?;
+
+    // Rename each column
+    let column_names = ["Fecha", "Hora", "ZP", "Contaminante"];
+    let new_column_names = ["Date", "Hour", "ZP", "Polluter"];
+
+    for (old_name, new_name) in column_names.iter().zip(new_column_names.iter()) {
+        let sql = format!("ALTER TABLE my_airDB RENAME COLUMN {} TO {}", old_name, new_name);
+        conn.execute(&sql, NO_PARAMS)?;
+    }
+
+    conn.execute("COMMIT;", NO_PARAMS)?;
+    conn.execute("PRAGMA foreign_keys=on;", NO_PARAMS)?;
+
+    Ok(())
+}
 
 
 fn query_count_imecas() -> Result<()> {
@@ -88,7 +108,11 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("Transforming data...");
     load()?;
 
-    query_count_imecas()?;
+    
+    // Update names
+    println!("Updating colnames ...");
+    update_col_names()?;
+    println!("Success!");
 
     Ok(())
 
