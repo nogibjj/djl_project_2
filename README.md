@@ -1,12 +1,21 @@
+[![Build Binary](https://github.com/nogibjj/djl_project_2/actions/workflows/build.yml/badge.svg)](https://github.com/nogibjj/djl_project_2/actions/workflows/build.yml)
+
+[![Format](https://github.com/nogibjj/djl_project_2/actions/workflows/format.yml/badge.svg)](https://github.com/nogibjj/djl_project_2/actions/workflows/format.yml)
+
+[![Lint](https://github.com/nogibjj/djl_project_2/actions/workflows/lint.yml/badge.svg)](https://github.com/nogibjj/djl_project_2/actions/workflows/lint.yml)
+
+[![Test](https://github.com/nogibjj/djl_project_2/actions/workflows/test.yml/badge.svg)](https://github.com/nogibjj/djl_project_2/actions/workflows/test.yml)
+
+
+
 # Project 2. RUST CLI Binary with SQLite 
 
 This project presents a Command-Line Interface (CLI) binary that interacts with an SQLite database, allowing you to perform CRUD (Create, Read, Update, Delete) operations on a "Polltion Records from Mexico City" table.  
 
 ## Introduction
-This CLI bianary is designed to create a SQLite database with Rust using ETL operations. The created database is located in the ETL folder within this project. Other CRUD opertions are performed to:
+This CLI banary is designed to create a SQLite database with Rust using ETL operations. The created database is located in the ETL folder within this project. Other CRUD opertions are performed to:
 - read and summarise the table
 - update column names
-- delete unnecessty columns
 
 
 ### CRUD operations
