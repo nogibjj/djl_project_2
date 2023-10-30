@@ -1,8 +1,16 @@
+extern crate rusqlite;
+extern crate chrono;
+extern crate csv;
+extern crate reqwest;
 use std::error::Error;
+use rusqlite::{Connection, params, Result, NO_PARAMS};
+use chrono::Local;
+use std::fs::File;
+use std::io::Write;
+use std::path::Path;
 use csv::Reader;
-use rusqlite::{params, Connection};
-use std::env;
-use reqwest;
+
+
 
 fn extract() -> Result<String, Box<dyn Error>> {
     let url = "https://github.com/jjsantos01/aire_cdmx/raw/master/datos/contaminantes_2019-05-17.cvs";
@@ -46,6 +54,31 @@ fn load() -> Result<String, Box<dyn Error>> {
 }
 
 
+
+
+fn query_count_imecas() -> Result<()> {
+    let conn = Connection::open("data/my_airDB.db")?;
+    let mut stmt = conn.prepare("SELECT zona, COUNT(*) AS total FROM my_airDB GROUP BY zona")?;
+    
+    println!("Zones in dataset:");
+    println!("{:<20} {:<10}", "Zone", "Count");
+    
+    for row in stmt.query_map(NO_PARAMS, |row| {
+        let zona: String = row.get(0)?;
+        let total: i64 = row.get(1)?;
+        Ok((zona, total))
+    })? {
+        let (zona, total) = row?;
+        println!("{:<20} {:<10}", zona, total);
+    }
+
+    Ok(())
+}
+
+
+
+
+
 fn main() -> Result<(), Box<dyn Error>> {
     // Extract data
     println!("Extracting data...");
@@ -55,6 +88,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("Transforming data...");
     load()?;
 
+    query_count_imecas()?;
+
     Ok(())
-}
+
+    }
+
 
