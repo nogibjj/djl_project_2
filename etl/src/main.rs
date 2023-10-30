@@ -6,7 +6,7 @@ use reqwest;
 
 fn extract() -> Result<String, Box<dyn Error>> {
     let url = "https://github.com/jjsantos01/aire_cdmx/raw/master/datos/contaminantes_2019-05-17.cvs";
-    let file_path = "etl/data/my_air_cont.csv";
+    let file_path = "data/my_air_cont.csv";
 
     let response = reqwest::blocking::get(url)?.bytes()?;
     std::fs::write(file_path, &response)?;
@@ -15,8 +15,8 @@ fn extract() -> Result<String, Box<dyn Error>> {
 }
 
 fn load() -> Result<String, Box<dyn Error>> {
-    let dataset = "etl/data/my_air_cont.csv";
-    let conn = Connection::open("ET/data/my_airDB.db")?;
+    let dataset = "data/my_air_cont.csv";
+    let conn = Connection::open("data/my_airDB.db")?;
 
     conn.execute("DROP TABLE IF EXISTS my_airDB", params![])?;
     conn.execute(
@@ -55,7 +55,6 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("Transforming data...");
     load()?;
 
-
-
     Ok(())
 }
+
