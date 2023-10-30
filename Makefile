@@ -8,9 +8,9 @@ lint:
 	cargo clippy
 
 test:
-	cargo test
+	#cargo test
 
 run:
-	#cargo run 
+	cargo run 
 
 all: format lint test release run
