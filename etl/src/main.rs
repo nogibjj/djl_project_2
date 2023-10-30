@@ -1,13 +1,8 @@
 extern crate rusqlite;
-extern crate chrono;
 extern crate csv;
 extern crate reqwest;
 use std::error::Error;
 use rusqlite::{Connection, params, Result, NO_PARAMS};
-use chrono::Local;
-use std::fs::File;
-use std::io::Write;
-use std::path::Path;
 use csv::Reader;
 
 
@@ -108,6 +103,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("Transforming data...");
     load()?;
 
+     // READ
+     
+     println!("Reading data...");
+     query_count_imecas()?;
     
     // Update names
     println!("Updating colnames ...");
