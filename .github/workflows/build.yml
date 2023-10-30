@@ -15,9 +15,6 @@ jobs:
         with:
           toolchain: stable
 
-      - name: Change working directory to the etl directory
-        run: cd etl
-
       - name: Build Rust binary in release mode
         run: cargo build --release
 
